@@ -1,0 +1,111 @@
+config MACH_LGE
+	bool
+
+menu "LGE Diag & Test Specific"
+
+config LGE_SUPPORT_RAPI
+        tristate "Support LGE RAPI"
+        default n
+        depends on MACH_LGE
+        help
+          LGE remote api functions
+
+config LGE_DIAGTEST
+        tristate "Support LGE diag test mode"
+        default n
+        depends on MACH_LGE
+        select LGE_SUPPORT_RAPI
+        help
+          LGE diag test mode
+
+config LGE_SUPPORT_AT_CMD
+        bool "Support LGE AT_CMD system"
+        default n
+        depends on MACH_LGE
+        help
+         LGE AT_CMD Support
+
+config LGE_DIAG_WMC
+        bool "Support LGE diag WMC"
+        default n
+        depends on LGE_DIAGTEST
+        help
+          LGE diag WMC enable
+
+config LGE_ATS_INPUT_DEVICE
+        bool "Support LGE ATS input device"
+        default n
+        depends on MACH_LGE
+        help
+         Choose if use ATS input device used for generating input event from user space
+
+#neo.kang@lge.com	10.12.11. S
+#0012347 : [kernel] add the LTE ers
+config LGE_LTE_ERS
+        bool "Support LGE LTE ERS"
+        default y
+        depends on LTE
+        depends on MACH_LGE_BRYCE
+        depends on ANDROID_RAM_CONSOLE
+        help
+          LGE LTE crash log enable
+
+#neo.kang@lge.com	10.12.11. E
+
+config LGE_ERI_DOWNLOAD
+	bool "LGE ERI DOWNLOAD"
+	depends on MACH_LGE_BRYCE
+	default n
+	help
+	  /data/eri/eri.bin file download, will be done if modem diag receives the write command.
+
+#neo.kang@lge.com	10.12.15. S
+#0012867 : [kernel] add the hidden reset
+config LGE_HIDDEN_RESET_PATCH
+        bool "Support LGE hidden reset function"
+        default n
+        depends on MACH_LGE_BRYCE
+        depends on ANDROID_RAM_CONSOLE
+        help
+          LGE hidden reset function
+#neo.kang@lge.com	10.12.15. E
+
+# LGE_CHANGE_S [jaeho.cho@lge.com] 2010-06-22, LG_FW_ANDROID_USB_GADGET
+config LGE_USB_GADGET_SUPPORT_FACTORY_USB
+	tristate "USB Gadget Support LGE Factory USB"
+	depends on USB_GADGET
+	help
+	  Supports LG USB driver
+	
+	default n
+
+# LGE_CHANGE_S [jaeho.cho@lge.com] 2010-06-22, LG_FW_ANDROID_USB_GADGET
+
+config LGE_PCB_VERSION
+	bool "Support LGE PCB Version RAPI"
+	default y 
+	depends on MACH_LGE
+	help
+	 Choose if use PCB Version RAPI
+
+config LGE_DLOAD_RESET_BOOT_UP
+	bool "Support LGE dload reset check"
+	default y 
+	depends on MACH_LGE
+	help
+	 incase dload reset, do not go into the charging mode
+
+config LGE_CHARGING_MODE_INFO
+	bool "Support LGE charging mode check"
+	default y 
+	depends on MACH_LGE
+	help
+	 charging mode notification command
+
+config LGE_SYNC_CMD
+	bool "Support LGE sync request"
+	default y 
+	depends on MACH_LGE
+	help
+	 sync request command
+endmenu
