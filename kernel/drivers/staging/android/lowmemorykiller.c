@@ -136,8 +136,7 @@ static int lowmem_shrink(struct shrinker *s, int nr_to_scan, gfp_t gfp_mask)
  * kernel/drivers/staging/android/lowmemorykiller.c
 */
 #if 1 //QCT SBA 404015
-		if (other_free < lowmem_minfree[i] &&
-				other_file < lowmem_minfree[i]) {
+		if (other_file < lowmem_minfree[i]) {
 			min_adj = lowmem_adj[i];
 			break;
 		}
